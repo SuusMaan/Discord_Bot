@@ -1,0 +1,32 @@
+name: Discord Notifications
+
+on:
+  push:
+    branches:
+      - main  # Или название вашей основной ветки
+  pull_request:
+    types: [opened, reopened, closed]
+
+jobs:
+  discord-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Notification
+        uses: Ilshatamirov/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_MESSAGE: |
+            New commit to ${{ github.repository }} by ${{ github.actor }}:
+            ${{ github.event.head_commit.message }}
+            Commit URL: ${{ github.event.head_commit.url }}
+        if: github.event_name == 'push'
+
+      - name: Send Discord PR Notification
+        if: github.event_name == 'pull_request'
+        uses: Ilshatamirov/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_MESSAGE: |
+            Pull Request ${{ github.event.pull_request.title }}
+            by ${{ github.actor }} is ${{ github.event.action }}
+            PR URL: ${{ github.event.pull_request.html_url }}
