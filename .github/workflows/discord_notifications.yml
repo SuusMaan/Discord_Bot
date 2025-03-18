@@ -38,7 +38,7 @@ jobs:
                 }
               }
             ]
-          }' ${{ secrets.DISCORD_WEBHOOK_URL }}
+          }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
 
       - name: Send Discord PR Notification
         if: github.event_name == 'pull_request'
@@ -47,4 +47,24 @@ jobs:
           -d '{
             "embeds": [
               {
-                "title": "🔀 Pull Request: ${{ github.event.pull
+                "title": "🔀 Pull Request: ${{ github.event.pull_request.title }}",
+                "description": "**Действие:** ${{ github.event.action }}\n\n**Автор:** ${{ github.actor }}",
+                "color": 3447003,
+                "fields": [
+                  {
+                    "name": "🌍 Ветка",
+                    "value": "`${{ github.event.pull_request.head.ref }}` → `${{ github.event.pull_request.base.ref }}`",
+                    "inline": true
+                  },
+                  {
+                    "name": "🔗 Ссылка на PR",
+                    "value": "[Перейти к PR](${{ github.event.pull_request.html_url }})",
+                    "inline": true
+                  }
+                ],
+                "footer": {
+                  "text": "GitHub Actions • ${{ github.event.pull_request.created_at }}"
+                }
+              }
+            ]
+          }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
