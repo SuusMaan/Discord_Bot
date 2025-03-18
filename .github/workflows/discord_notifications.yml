@@ -18,19 +18,14 @@ jobs:
           embeds: |
             [
               {
-                "title": "Новый коммит в ${{ github.repository }}",
-                "description": "${{ github.event.head_commit.message }}",
-                "color": 5814783,  # Зеленый цвет
+                "title": "🔨 Новый коммит в ${{ github.repository }}",
+                "description": "**${{ github.event.head_commit.message }}**\n\nАвтор: ${{ github.actor }}",
+                "color": 5814783,
                 "fields": [
                   {
-                    "name": "Автор",
-                    "value": "${{ github.actor }}",
-                    "inline": true
-                  },
-                  {
                     "name": "URL коммита",
-                    "value": "${{ github.event.head_commit.url }}",
-                    "inline": true
+                    "value": "[Перейти к коммиту](${{ github.event.head_commit.url }})",
+                    "inline": false
                   }
                 ],
                 "timestamp": "${{ github.event.head_commit.timestamp }}"
@@ -46,13 +41,14 @@ jobs:
           embeds: |
             [
               {
-                "title": "Pull Request: ${{ github.event.pull_request.title }}",
-                "description": "Pull Request by ${{ github.actor }} is ${{ github.event.action }}",
-                "color": 3447003,  # Синий цвет
+                "title": "⬆️ Pull Request: ${{ github.event.pull_request.title }}",
+                "description": "**Действие:** ${{ github.event.action }}  by ${{ github.actor }}",
+                "color": 3447003,
                 "fields": [
                   {
                     "name": "PR URL",
-                    "value": "${{ github.event.pull_request.html_url }}"
+                    "value": "[Перейти к PR](${{ github.event.pull_request.html_url }})",
+                    "inline": false
                   }
                 ],
                 "timestamp": "${{ github.event.pull_request.created_at }}"
