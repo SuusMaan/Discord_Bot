@@ -28,12 +28,12 @@ jobs:
                 \"fields\": [
                   {
                     \"name\": \"🌍 Ветка\",
-                    \"value\": \"\`${{ github.ref }}\`\",\n
+                    \"value\": \"\`${{ github.ref }}\`\",
                     \"inline\": true
                   },
                   {
                     \"name\": \"🔖 Хэш коммита\",
-                    \"value\": \"\`${{ github.sha }}\`\",\n
+                    \"value\": \"\`${{ github.sha }}\`\",
                     \"inline\": true
                   },
                   {
