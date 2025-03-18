@@ -83,7 +83,7 @@ async def on_interaction(interaction: discord.Interaction):
 async def on_ready():
     print(f'Бот {bot.user.name} подключился к Discord!')
 
-# Запуск бота
+# Запуск ботаы
 async def main():
     async with bot:
         await load_extensions()
