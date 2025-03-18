@@ -1,3 +1,12 @@
+Отлично, что уведомления теперь работают! Давайте улучшим оформление, чтобы сообщения выглядели еще круче. Мы можем настроить цвет embed, добавить больше полей, изменить заголовки и описания, а также добавить эмодзи для визуальной привлекательности.
+
+---
+
+### Улучшенный Workflow
+
+Вот обновленная версия вашего workflow с улучшенным оформлением:
+
+```yaml
 name: Discord Notifications
 
 on:
@@ -18,17 +27,24 @@ jobs:
           -d '{
             "embeds": [
               {
-                "title": "🔨 Новый коммит в ${{ github.repository }}",
-                "description": "**${{ github.event.head_commit.message }}**\n\nАвтор: ${{ github.actor }}",
+                "title": "🚀 Новый коммит в ${{ github.repository }}",
+                "description": "**Сообщение коммита:**\n${{ github.event.head_commit.message }}\n\n**Автор:** ${{ github.actor }}",
                 "color": 5814783,
                 "fields": [
                   {
-                    "name": "URL коммита",
+                    "name": "🌍 Ветка",
+                    "value": "`${{ github.ref }}`",
+                    "inline": true
+                  },
+                  {
+                    "name": "🔗 Ссылка на коммит",
                     "value": "[Перейти к коммиту](${{ github.event.head_commit.url }})",
-                    "inline": false
+                    "inline": true
                   }
                 ],
-                "timestamp": "${{ github.event.head_commit.timestamp }}"
+                "footer": {
+                  "text": "GitHub Actions • ${{ github.event.head_commit.timestamp }}"
+                }
               }
             ]
           }' ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -40,17 +56,4 @@ jobs:
           -d '{
             "embeds": [
               {
-                "title": "⬆️ Pull Request: ${{ github.event.pull_request.title }}",
-                "description": "**Действие:** ${{ github.event.action }}  by ${{ github.actor }}",
-                "color": 3447003,
-                "fields": [
-                  {
-                    "name": "PR URL",
-                    "value": "[Перейти к PR](${{ github.event.pull_request.html_url }})",
-                    "inline": false
-                  }
-                ],
-                "timestamp": "${{ github.event.pull_request.created_at }}"
-              }
-            ]
-          }' ${{ secrets.DISCORD_WEBHOOK_URL }}
+                "title": "🔀 Pull Request: ${{ github.event.pull
