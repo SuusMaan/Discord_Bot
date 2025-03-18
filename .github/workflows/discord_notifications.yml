@@ -13,48 +13,44 @@ jobs:
     steps:
       - name: Send Discord Notification (Commit)
         if: github.event_name == 'push'
-        uses: rjstone/discord-webhook-notify@v1.0.0
-        with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: |
-            {
-              "embeds": [
-                {
-                  "title": "🔨 Новый коммит в ${{ github.repository }}",
-                  "description": "**${{ github.event.head_commit.message }}**\n\nАвтор: ${{ github.actor }}",
-                  "color": 5814783,
-                  "fields": [
-                    {
-                      "name": "URL коммита",
-                      "value": "[Перейти к коммиту](${{ github.event.head_commit.url }})",
-                      "inline": false
-                    }
-                  ],
-                  "timestamp": "${{ github.event.head_commit.timestamp }}"
-                }
-              ]
-            }
+        run: |
+          curl -H "Content-Type: application/json" -X POST \
+          -d '{
+            "embeds": [
+              {
+                "title": "🔨 Новый коммит в ${{ github.repository }}",
+                "description": "**${{ github.event.head_commit.message }}**\n\nАвтор: ${{ github.actor }}",
+                "color": 5814783,
+                "fields": [
+                  {
+                    "name": "URL коммита",
+                    "value": "[Перейти к коммиту](${{ github.event.head_commit.url }})",
+                    "inline": false
+                  }
+                ],
+                "timestamp": "${{ github.event.head_commit.timestamp }}"
+              }
+            ]
+          }' ${{ secrets.DISCORD_WEBHOOK_URL }}
 
       - name: Send Discord PR Notification
         if: github.event_name == 'pull_request'
-        uses: rjstone/discord-webhook-notify@v1.0.0
-        with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: |
-            {
-              "embeds": [
-                {
-                  "title": "⬆️ Pull Request: ${{ github.event.pull_request.title }}",
-                  "description": "**Действие:** ${{ github.event.action }}  by ${{ github.actor }}",
-                  "color": 3447003,
-                  "fields": [
-                    {
-                      "name": "PR URL",
-                      "value": "[Перейти к PR](${{ github.event.pull_request.html_url }})",
-                      "inline": false
-                    }
-                  ],
-                  "timestamp": "${{ github.event.pull_request.created_at }}"
-                }
-              ]
-            }
+        run: |
+          curl -H "Content-Type: application/json" -X POST \
+          -d '{
+            "embeds": [
+              {
+                "title": "⬆️ Pull Request: ${{ github.event.pull_request.title }}",
+                "description": "**Действие:** ${{ github.event.action }}  by ${{ github.actor }}",
+                "color": 3447003,
+                "fields": [
+                  {
+                    "name": "PR URL",
+                    "value": "[Перейти к PR](${{ github.event.pull_request.html_url }})",
+                    "inline": false
+                  }
+                ],
+                "timestamp": "${{ github.event.pull_request.created_at }}"
+              }
+            ]
+          }' ${{ secrets.DISCORD_WEBHOOK_URL }}
