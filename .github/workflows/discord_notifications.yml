@@ -38,7 +38,7 @@ jobs:
                   },
                   {
                     "name": "⏱️ Время выполнения",
-                    "value": "${{ job.steps[0].duration }}",
+                    "value": "'"${{ job.steps[0].duration }}"'",
                     "inline": true
                   },
                   {
@@ -79,7 +79,7 @@ jobs:
                   },
                   {
                     "name": "⏱️ Время выполнения",
-                    "value": "${{ job.steps[0].duration }}",
+                    "value": "'"${{ job.steps[0].duration }}"'",
                     "inline": true
                   },
                   {
