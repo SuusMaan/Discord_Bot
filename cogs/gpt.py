@@ -101,7 +101,7 @@ class AIMLIntegrationCog(commands.Cog):
             else:
                 embed = discord.Embed(
                     title="Ошибка AIML API",
-                    description=f"Не удалось получить ответ: {response_json}",
+                    description=f"Не удалось получить ответ: {response_json} ",
                     color=discord.Color.red()
                 )
                 await processing_message.edit(embed=embed)  # Изменяем сообщение "Обработка запроса"
