@@ -1,0 +1,24 @@
+# Python
+*.pyc
+__pycache__/
+*.sqlite3
+*.db
+
+# Environment files
+.env
+
+# Dependency directories
+.venv/
+env/
+venv/
+ENV/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Other
+*.swp
