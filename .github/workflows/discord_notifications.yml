@@ -19,8 +19,12 @@ jobs:
             "embeds": [
               {
                 "title": "🚀 Новый коммит в ${{ github.repository }}",
-                "description": "**Сообщение коммита:**\n${{ github.event.head_commit.message }}\n\n**Автор:** ${{ github.actor }}",
+                "description": "**Сообщение коммита:**\n${{ github.event.head_commit.message }}\n\n",
                 "color": 5814783,
+                "author": {
+                  "name": "${{ github.actor }}",
+                  "icon_url": "https://github.com/${{ github.actor }}.png?size=128"
+                },
                 "fields": [
                   {
                     "name": "🌍 Ветка",
@@ -48,8 +52,12 @@ jobs:
             "embeds": [
               {
                 "title": "🔀 Pull Request: ${{ github.event.pull_request.title }}",
-                "description": "**Действие:** ${{ github.event.action }}\n\n**Автор:** ${{ github.actor }}",
+                "description": "**Действие:** ${{ github.event.action }}\n\n",
                 "color": 3447003,
+                "author": {
+                  "name": "${{ github.actor }}",
+                  "icon_url": "https://github.com/${{ github.actor }}.png?size=128"
+                },
                 "fields": [
                   {
                     "name": "🌍 Ветка",
