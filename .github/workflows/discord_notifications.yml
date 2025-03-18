@@ -3,7 +3,7 @@ name: Discord Notifications
 on:
   push:
     branches:
-      - main  # Или название вашей основной ветки
+      - main
   pull_request:
     types: [opened, reopened, closed]
 
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Discord Notification
-        uses: Ilshatamirov/action-discord@master
+        uses: Ilshatamirov/action-discord@v1  # Используем конкретную версию
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DISCORD_MESSAGE: |
@@ -23,7 +23,7 @@ jobs:
 
       - name: Send Discord PR Notification
         if: github.event_name == 'pull_request'
-        uses: Ilshatamirov/action-discord@master
+        uses: Ilshatamirov/action-discord@v1  # Используем конкретную версию
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
           DISCORD_MESSAGE: |
