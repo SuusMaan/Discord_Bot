@@ -19,7 +19,7 @@ jobs:
             "embeds": [
               {
                 "title": "🚀 Новый коммит в ${{ github.repository }}",
-                "description": "**Сообщение коммита:**\n${{ github.event.head_commit.message }}\n\n",
+                "description": "**Сообщение коммита:**\n${{ github.event.head_commit.message }}\n\n**Описание репозитория:**\n${{ github.event.repository.description }}\n\n**Статус CI/CD:** ✅ Успешно",
                 "color": 5814783,
                 "author": {
                   "name": "${{ github.actor }}",
@@ -32,13 +32,26 @@ jobs:
                     "inline": true
                   },
                   {
+                    "name": "🔖 Хэш коммита",
+                    "value": "`${{ github.sha }}`",
+                    "inline": true
+                  },
+                  {
+                    "name": "⏱️ Время выполнения",
+                    "value": "${{ job.steps.*.duration }}",
+                    "inline": true
+                  },
+                  {
                     "name": "🔗 Ссылка на коммит",
                     "value": "[Перейти к коммиту](${{ github.event.head_commit.url }})",
-                    "inline": true
+                    "inline": false
                   }
                 ],
                 "footer": {
                   "text": "GitHub Actions • ${{ github.event.head_commit.timestamp }}"
+                },
+                "thumbnail": {
+                  "url": "https://i.imgur.com/viFTchm.gif"
                 }
               }
             ]
@@ -52,7 +65,7 @@ jobs:
             "embeds": [
               {
                 "title": "🔀 Pull Request: ${{ github.event.pull_request.title }}",
-                "description": "**Действие:** ${{ github.event.action }}\n\n",
+                "description": "**Действие:** ${{ github.event.action }}\n\n**Описание репозитория:**\n${{ github.event.repository.description }}\n\n**Статус CI/CD:** ✅ Успешно",
                 "color": 3447003,
                 "author": {
                   "name": "${{ github.actor }}",
@@ -65,13 +78,21 @@ jobs:
                     "inline": true
                   },
                   {
+                    "name": "⏱️ Время выполнения",
+                    "value": "${{ job.steps.*.duration }}",
+                    "inline": true
+                  },
+                  {
                     "name": "🔗 Ссылка на PR",
                     "value": "[Перейти к PR](${{ github.event.pull_request.html_url }})",
-                    "inline": true
+                    "inline": false
                   }
                 ],
                 "footer": {
                   "text": "GitHub Actions • ${{ github.event.pull_request.created_at }}"
+                },
+                "thumbnail": {
+                  "url": "https://i.imgur.com/viFTchm.gif"
                 }
               }
             ]
