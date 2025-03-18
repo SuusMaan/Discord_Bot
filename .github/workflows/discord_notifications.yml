@@ -50,7 +50,7 @@ jobs:
                 "footer": {
                   "text": "GitHub Actions • ${{ github.event.head_commit.timestamp }}"
                 },
-                "thumbnail": {
+                "image": {
                   "url": "https://i.imgur.com/viFTchm.gif"
                 }
               }
@@ -91,7 +91,7 @@ jobs:
                 "footer": {
                   "text": "GitHub Actions • ${{ github.event.pull_request.created_at }}"
                 },
-                "thumbnail": {
+                "image": {
                   "url": "https://i.imgur.com/viFTchm.gif"
                 }
               }
