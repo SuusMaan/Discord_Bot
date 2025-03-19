@@ -119,7 +119,7 @@ def keep_alive():
     t.start()
 
 
-# Запуск Flask
+# Запуск Flaska
 keep_alive()
 
 
